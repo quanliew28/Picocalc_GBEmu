@@ -6,7 +6,7 @@ A Game Boy emulator running on the Raspberry Pi Pico 2, featuring an ST7789P LCD
 ![License](https://img.shields.io/badge/License-MIT-blue)
 ![Status](https://img.shields.io/badge/Status-Active%20Development-orange)
 
-![Pico_GBEmu](https://github.com/quanliew28/Picocalc_GBEmu/blob/main/assets/picocalc_gbemu.jpeg?raw=true)
+![Pico_GBEmu](https://github.com/quanliew28/Picocalc_GBEmu/blob/main/assets/picocalc_gbemu.jpeg?raw=true | width=100)
 
 
 ## 🎮 Features
