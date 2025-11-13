@@ -38,9 +38,7 @@ pico_sdk_init()
 add_executable(Pico_GBemu Pico_GBemu.c 
 drivers/lcd.c
 drivers/lcd.h
-drivers/font.h
-drivers/font-5x10.c
-drivers/font-8x10.c )
+lib/peanut_gb.h)
 
 pico_set_program_name(Pico_GBemu "Pico_GBemu")
 pico_set_program_version(Pico_GBemu "0.1")
@@ -51,7 +49,13 @@ pico_enable_stdio_usb(Pico_GBemu 1)
 
 # Add the standard library to the build
 target_link_libraries(Pico_GBemu
-        pico_stdlib hardware_spi)
+        pico_stdlib 
+        hardware_spi 
+        hardware_i2c
+        hardware_gpio
+        pico_multicore
+        hardware_dma
+        )
 
 # Add the standard include files to the build
 target_include_directories(Pico_GBemu PRIVATE

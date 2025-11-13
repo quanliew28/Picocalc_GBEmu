@@ -1,7 +1,6 @@
 #pragma once
 
 #include "pico/stdlib.h"
-#include "font.h"
 
 #define LCD_SPI         (spi1)          // SPI interface for the LCD display
 
@@ -70,50 +69,15 @@
 #define UPPER8(x)       ((x) >> 8)      // upper byte of a 16-bit value
 #define LOWER8(x)       ((x) & 0xFF)    // lower byte of a 16-bit value
 
-// Function prototypes
 
-// colour and display state functions
-void lcd_set_foreground(uint16_t colour);
-void lcd_set_background(uint16_t colour);
-void lcd_set_reverse(bool reverse_on);
-void lcd_set_underscore(bool underscore_on);
-void lcd_set_bold(bool bold_on);
-void lcd_set_font(const font_t *new_font);
-uint8_t lcd_get_columns(void);
-uint8_t lcd_get_glyph_width(void);
-
-// Display control functions
-void lcd_reset(void);
-void lcd_display_on(void);
-void lcd_display_off(void);
-
-// Low-level SPI functions
-void lcd_write_cmd(uint8_t cmd);
-void lcd_write_data(uint8_t len, ...);
-void lcd_write16_data(uint8_t len, ...);
-void lcd_write16_buf(const uint16_t *buffer, size_t len);
-
-// Display window and drawing functions
-void lcd_blit(const uint16_t *pixels, uint16_t x, uint16_t y, uint16_t width, uint16_t height);
-void lcd_solid_rectangle(uint16_t colour, uint16_t x, uint16_t y, uint16_t width, uint16_t height);
-
-// Scrolling functions
-void lcd_define_scrolling(uint16_t top_fixed_area, uint16_t bottom_fixed_area);
-void lcd_scroll_reset();
-void lcd_scroll_clear();
-void lcd_scroll_up(void);
-void lcd_scroll_down(void);
-
-// Character and cursor functions
-void lcd_putc(uint8_t column, uint8_t row, uint8_t c);
-void lcd_putstr(uint8_t column, uint8_t row, const char *str);
-void lcd_move_cursor(uint8_t x, uint8_t y);
-void lcd_draw_cursor(void);
-void lcd_erase_cursor(void);
-void lcd_enable_cursor(bool cursor_on);
-bool lcd_cursor_enabled(void);
-
-// Initialization
-void lcd_clear_screen(void);
-void lcd_erase_line(uint8_t row, uint8_t col_start, uint8_t col_end);
+//Forward Declaration
 void lcd_init(void);
+void lcd_cmd(uint8_t cmd);
+void lcd_data(const uint8_t *data, size_t len);
+void lcd_set_window(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1);
+void lcd_dma_init(void);
+void lcd_data_dma8(const uint8_t *data, size_t len);
+void lcd_data_dma16(const uint16_t *data, size_t len);
+void lcd_dma_write_line(const uint16_t *pixels, int x, int y, int width);
+void lcd_dma_write_rect(const uint16_t *pixels, int x, int y, int width, int height);
+void test_dma_display_once(void);
